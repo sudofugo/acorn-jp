@@ -15,6 +15,7 @@ import { type ReportReason, useReport } from '~/hooks/moderation/report'
 import { usePostRemove } from '~/hooks/mutations/posts/remove'
 import { usePostSave } from '~/hooks/mutations/posts/save'
 import { usePostVote } from '~/hooks/mutations/posts/vote'
+import { useTranslate } from '~/hooks/mutations/common/translate'
 import { useAuth } from '~/stores/auth'
 import { usePreferences } from '~/stores/preferences'
 import { type Post } from '~/types/post'
@@ -48,6 +49,7 @@ export function PostMenu({ children, onPress, post }: Props) {
   const { hide } = useHide()
   const { handleLink, openInBrowser } = useLink()
   const { download } = useDownloadImages()
+  const { translate, revert, isTranslating } = useTranslate()
 
   return (
     <ContextMenu
@@ -119,6 +121,43 @@ export function PostMenu({ children, onPress, post }: Props) {
               },
               id: 'reply',
               title: t('reply'),
+            },
+            {
+              action() {
+                const isTranslated = post.translatedTitle || post.translatedBody;
+                if (isTranslated) {
+                  revert({
+                    id: post.id,
+                    target: 'post',
+                    postId: post.id,
+                  });
+                } else {
+                  if (post.title) {
+                    translate({
+                      id: post.id,
+                      text: post.title,
+                      target: 'post',
+                      type: 'title',
+                      postId: post.id,
+                    });
+                  }
+                  if (post.body) {
+                    translate({
+                      id: post.id,
+                      text: post.body,
+                      target: 'post',
+                      type: 'body',
+                      postId: post.id,
+                    });
+                  }
+                }
+              },
+              icon: {
+                name: 'translate',
+                type: 'icon',
+              },
+              id: 'translate',
+              title: isTranslating ? t('translating') : (post.translatedTitle || post.translatedBody ? t('showOriginal') : t('translatePost')),
             },
           ],
           title: '',

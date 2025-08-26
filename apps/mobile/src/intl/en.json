@@ -196,6 +196,10 @@
         "downloadImage": "Download image",
         "downvote": "Downvote",
         "editComment": "Edit comment",
+        "translatePost": "Translate post",
+        "translateComment": "Translate comment",
+        "translating": "Translating...",
+        "showOriginal": "Show original",
         "hideComment": "Hide comment",
         "hideCommunity": "Hide r/{community}",
         "hidePost": "Hide post",
@@ -631,7 +635,8 @@
         "gestures": "Gestures",
         "preferences": "Preferences",
         "sort": "Sort",
-        "title": "Settings"
+        "title": "Settings",
+        "translation": "Translation"
       },
       "sort": {
         "community": {
@@ -668,6 +673,29 @@
         }
       },
       "title": "Settings"
+    },
+    "translation": {
+        "title": "Translation",
+        "llmApiEndpoint": {
+            "label": "API Endpoint",
+            "hint": "The endpoint of the OpenAI-compatible API."
+        },
+        "llmApiKey": {
+            "label": "API Key",
+            "hint": "Your API key."
+        },
+        "llmModel": {
+            "label": "Model",
+            "hint": "The model to use for translation."
+        },
+        "llmSystemPrompt": {
+            "label": "System Prompt",
+            "hint": "The system prompt to use for translation."
+        },
+        "llmTemperature": {
+            "label": "Temperature: {value}",
+            "hint": "Controls the creativity of the translation."
+        }
     },
     "users": {
       "user": {

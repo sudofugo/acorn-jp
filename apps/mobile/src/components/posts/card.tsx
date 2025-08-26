@@ -216,7 +216,7 @@ export function PostCard({ expanded, post, style, viewing }: Props) {
             size={fontSizePostTitle}
             weight={boldTitle ? 'bold' : undefined}
           >
-            {post.title}
+            {post.translatedTitle || post.title}
           </Text>
 
           <FlairCard
@@ -267,7 +267,7 @@ export function PostCard({ expanded, post, style, viewing }: Props) {
           />
         ) : null}
 
-        {expanded && post.body ? (
+        {expanded && (post.body || post.translatedBody) ? (
           <Markdown
             meta={post.media.meta}
             recyclingKey={post.id}
@@ -275,7 +275,7 @@ export function PostCard({ expanded, post, style, viewing }: Props) {
             style={styles.body}
             variant="post"
           >
-            {post.body}
+            {post.translatedBody || post.body}
           </Markdown>
         ) : null}
 

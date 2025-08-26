@@ -14,6 +14,7 @@ import { type ReportReason, useReport } from '~/hooks/moderation/report'
 import { useCommentRemove } from '~/hooks/mutations/comments/remove'
 import { useCommentSave } from '~/hooks/mutations/comments/save'
 import { useCommentVote } from '~/hooks/mutations/comments/vote'
+import { useTranslate } from '~/hooks/mutations/common/translate'
 import { useAuth } from '~/stores/auth'
 import { usePreferences } from '~/stores/preferences'
 import { type CommentReply } from '~/types/comment'
@@ -45,6 +46,7 @@ export function CommentMenu({ children, comment, onPress }: Props) {
   const { copy } = useCopy()
   const { hide } = useHide()
   const { handleLink, openInBrowser } = useLink()
+  const { translate, revert, isTranslating } = useTranslate()
 
   return (
     <ContextMenu
@@ -121,6 +123,32 @@ export function CommentMenu({ children, comment, onPress }: Props) {
               },
               id: 'reply',
               title: t('reply'),
+            },
+            {
+              action() {
+                const isTranslated = comment.translatedBody;
+                if (isTranslated) {
+                  revert({
+                    id: comment.id,
+                    target: 'comment',
+                    postId: comment.post.id,
+                  });
+                } else {
+                  translate({
+                    id: comment.id,
+                    text: comment.body,
+                    target: 'comment',
+                    type: 'body',
+                    postId: comment.post.id,
+                  });
+                }
+              },
+              icon: {
+                name: 'translate',
+                type: 'icon',
+              },
+              id: 'translate',
+              title: isTranslating ? t('translating') : (comment.translatedBody ? t('showOriginal') : t('translateComment')),
             },
           ],
           title: '',

@@ -14,6 +14,7 @@ export type Comment =
 
 export type CommentReply = {
   body: string
+  translatedBody?: string
   collapsed: boolean
   community: {
     id: string
