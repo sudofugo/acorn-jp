@@ -33,6 +33,8 @@ export type Post = {
   spoiler: boolean
   sticky: boolean
   title: string
+  translatedTitle?: string
+  translatedBody?: string
   type: PostType
   url?: string
   user: {

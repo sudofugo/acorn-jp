@@ -35,6 +35,20 @@ export default function Screen() {
         {
           arrow: true,
           icon: {
+            name: 'Translate',
+            type: 'icon',
+            weight: 'duotone',
+          },
+          label: t('translation'),
+          onPress() {
+            router.push({
+              pathname: '/settings/translation',
+            })
+          },
+        },
+        {
+          arrow: true,
+          icon: {
             name: 'HandSwipeLeft',
             type: 'icon',
             weight: 'duotone',

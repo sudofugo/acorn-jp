@@ -185,7 +185,7 @@ export function CommentCard({
               style={styles.body}
               variant="comment"
             >
-              {comment.body}
+              {comment.translatedBody || comment.body}
             </Markdown>
           )}
 

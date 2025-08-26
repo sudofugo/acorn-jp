@@ -20,6 +20,11 @@ import {
 export const PREFERENCES_KEY = 'preferences-storage'
 
 export type PreferencesPayload = {
+  llmApiEndpoint: string
+  llmApiKey: string
+  llmModel: string
+  llmTemperature: number
+  llmSystemPrompt: string
   autoPlay: boolean
   blurNavigation: boolean
   blurNsfw: boolean
@@ -87,6 +92,11 @@ type State = PreferencesPayload & {
 export const usePreferences = create<State>()(
   persist(
     (set) => ({
+      llmApiEndpoint: 'https://api.openai.com/v1/chat/completions',
+      llmApiKey: '',
+      llmModel: 'gpt-3.5-turbo',
+      llmTemperature: 0.7,
+      llmSystemPrompt: 'You are a translator. Translate the following text to English. Preserve the Markdown formatting.',
       autoPlay: true,
       blurNavigation: true,
       blurNsfw: true,
